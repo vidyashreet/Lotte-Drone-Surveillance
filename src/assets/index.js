@@ -14,4 +14,3 @@ export { default as wave } from './wave.svg'
 export { default as profile } from './profile.svg'
 export { default as modifiedPlus } from './modifiedPlus.svg'
 export { default as crossFill } from './cross_fill.svg'
-

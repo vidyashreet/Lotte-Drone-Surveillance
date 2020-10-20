@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Typography, Box } from '@material-ui/core'
-import { headerIcon, wave, profile} from '../../assets'
+import { headerIcon, wave, profile } from '../../assets'
 
 class AppHeader extends PureComponent {
     render () {

@@ -20,8 +20,8 @@ class Video extends PureComponent {
     }
 
     render () {
-    const surveillanceUrl = this.state.isTrajectories ? "http://18.189.160.225:8080/video" : "https://www.youtube.com/embed/zYypJPJipYc"
-    const { droneData, droneObjectCount } = this.props
+        const surveillanceUrl = this.state.isTrajectories ? 'http://18.189.160.225:8080/video' : 'https://www.youtube.com/embed/zYypJPJipYc'
+        const { droneData, droneObjectCount } = this.props
 
         return (
             <Box display="flex" flexDirection="column" color="white.100">
@@ -49,7 +49,7 @@ class Video extends PureComponent {
                                     {`${droneData.height.data} ${droneData.height.unit.charAt(0)}`}
                                 </Typography>
                             </Box>
-                            <Box pr={2} width="70px" >
+                            <Box pr={2} width="70px">
                                 <Typography variant="caption">
                                     Detecting objects:
                                 </Typography>

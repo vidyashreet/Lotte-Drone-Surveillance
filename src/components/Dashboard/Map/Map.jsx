@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { Box, Grid, Typography } from '@material-ui/core'
 import Canvas from './Canvas'
 import PropTypes from 'prop-types'
-import { ellipse, crossFill, modifiedPlus} from '../../../assets'
+import { ellipse, crossFill, modifiedPlus } from '../../../assets'
 
 class Map extends PureComponent {
     constructor (props) {
@@ -20,7 +20,6 @@ class Map extends PureComponent {
     }
 
     render () {
-
         const { mapViewDetails } = this.props
         return (
             <>
@@ -35,7 +34,7 @@ class Map extends PureComponent {
                         alignItems="flex-end"
                     >
                         <Grid item xs={3}>
-                            <Box display="flex" flexDirection="row" >
+                            <Box display="flex" flexDirection="row">
                                 <Box pr={2} pt={1}>
                                     <img src={ellipse} width="15px" />
                                 </Box>
