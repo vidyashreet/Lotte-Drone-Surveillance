@@ -12,8 +12,10 @@ class Canvas extends PureComponent {
         const h = ctx.canvas.height
         ctx.font = '10px Arial'
         ctx.fillStyle = '#DADCE0'
-        ctx.fillText('z', 40, 190)
-        ctx.fillText('x', 27, 205)
+        ctx.fillText('z', 39, 286)
+        ctx.fillText('x', 27, 300)
+        ctx.fillText('5m', 320, 313)
+        ctx.fillText('5m', 335, 300)
         for (let x = 0; x < w; x += 35) {
             if (x === 0) {
                 ctx.moveTo(x, 0)
@@ -60,6 +62,8 @@ class Canvas extends PureComponent {
         ctx.fillStyle = '#DADCE0'
         ctx.fillText('z', 40, 190)
         ctx.fillText('x', 27, 205)
+        ctx.fillText('5m', 320, 313)
+        ctx.fillText('5m', 335, 300)
         for (let x = 0; x < w; x += 35) {
             if (x === 0) {
                 ctx.moveTo(x, 0)

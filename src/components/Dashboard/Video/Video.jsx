@@ -20,7 +20,7 @@ class Video extends PureComponent {
     }
 
     render () {
-        const surveillanceUrl = this.state.isTrajectories ? 'http://18.189.160.225:3000/video' : 'https://www.youtube.com/embed/zYypJPJipYc'
+        const surveillanceUrl = this.state.isTrajectories ? 'http://18.189.160.225:1937/video' : 'https://www.youtube.com/embed/zYypJPJipYc'
         const { droneData, droneObjectCount } = this.props
 
         return (

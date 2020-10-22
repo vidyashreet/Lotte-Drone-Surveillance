@@ -48,12 +48,12 @@ class Dashboard extends PureComponent {
     constructor (props) {
         super(props)
 
-        this.mapViewData = [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
+        //this.mapViewData = [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
 
         this.state = {
             socketData: undefined,
             logData: [],
-            mapViewData: [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
+            mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }]
         }
 
         this.handleDashboardData = this.handleDashboardData.bind(this)
@@ -68,7 +68,7 @@ class Dashboard extends PureComponent {
     handleDashboardData () {
         const { socketData } = this.state
         this.setState(prevState => ({
-            mapViewData: [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
+            mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }]
         }))
         this.setState(prevState => ({
             mapViewData: [...prevState.mapViewData, { uri: ellipse, x: (socketData.drone.map.x), y: (socketData.drone.map.y) }]
