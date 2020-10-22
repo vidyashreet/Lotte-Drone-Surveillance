@@ -20,7 +20,7 @@ class Video extends PureComponent {
     }
 
     render () {
-        const surveillanceUrl = this.state.isTrajectories ? 'http://18.189.160.225:8080/video' : 'https://www.youtube.com/embed/zYypJPJipYc'
+        const surveillanceUrl = this.state.isTrajectories ? 'http://18.189.160.225:3000/video' : 'https://www.youtube.com/embed/zYypJPJipYc'
         const { droneData, droneObjectCount } = this.props
 
         return (
@@ -44,21 +44,23 @@ class Video extends PureComponent {
                                     Drone Height:
                                 </Typography>
                             </Box>
+                            {this.props.droneData &&
                             <Box pr={5} pt={1}>
                                 <Typography variant="h2">
                                     {`${droneData.height.data} ${droneData.height.unit.charAt(0)}`}
                                 </Typography>
-                            </Box>
+                            </Box>}
                             <Box pr={2} width="70px">
                                 <Typography variant="caption">
                                     Detecting objects:
                                 </Typography>
                             </Box>
+                            {droneObjectCount &&
                             <Box pt={1}>
                                 <Typography pt={2} variant="h2">
                                     {droneObjectCount}
                                 </Typography>
-                            </Box>
+                            </Box>}
                         </Box>
                         <Box flexShrink={0}>
                             <Box>
@@ -81,8 +83,8 @@ class Video extends PureComponent {
 }
 
 Map.propTypes = {
-    droneData: PropTypes.object.isRequired,
-    droneObjectCount: PropTypes.number.isRequired
+    droneData: PropTypes.object,
+    droneObjectCount: PropTypes.number
 }
 
 export default Video

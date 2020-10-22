@@ -71,7 +71,7 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-    mapViewDetails: PropTypes.array.isRequired
+    mapViewDetails: PropTypes.array
 }
 
 export default Map

@@ -32,7 +32,7 @@ const data = {
     }, {
         type: 'pedestrian',
         id: 2,
-        map: { x: 20, y: 46.45194233502538 },
+        map: { x: 150, y: 46.45194233502538 },
         log: {
             originalMetrics: { map: { x: 18, y: 48 }, distance: { data: 9, unit: 'meter' }, direction: { data: 8, unit: 'degree' }, gps: { longitude: 76.5997653, latitude: 11.4466737 } },
             deviation: {
@@ -44,49 +44,45 @@ const data = {
     }]
 }
 
-class Dashboard extends React.Component {
+class Dashboard extends PureComponent {
     constructor (props) {
         super(props)
 
-        this.mapViewData = [{ uri: arrowLeft, x: 16, y: 165 }, { uri: arrowTop, x: 26, y: 155 }]
+        this.mapViewData = [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
 
         this.state = {
             socketData: undefined,
-            logData: []
+            logData: [],
+            mapViewData: [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
         }
 
-        this.handleMapViewData = this.handleMapViewData.bind(this)
-        this.handleLogViewData = this.handleLogViewData.bind(this)
+        this.handleDashboardData = this.handleDashboardData.bind(this)
         connect(message => {
             if (message.drone) {
                 this.setState({ socketData: message })
-                this.handleLogViewData()
+                this.handleDashboardData()
             }
         })
     }
 
-    handleMapViewData () {
+    handleDashboardData () {
         const { socketData } = this.state
-
-        this.mapViewData = [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
-        this.mapViewData.push({ uri: ellipse, x: (socketData.drone.map.x), y: (socketData.drone.map.y) })
-        if (socketData.objects.length) {
-            socketData.objects.map((object, index) => {
-                this.mapViewData.push({ uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y) })
-            })
-            socketData.objects.map((object, index) => {
-                this.mapViewData.push({ uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y) })
-            })
-        }
-    }
-
-    handleLogViewData () {
-        const { socketData } = this.state
-
-        if (socketData.objects.length) {
+        this.setState(prevState => ({
+            mapViewData: [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
+        }))
+        this.setState(prevState => ({
+            mapViewData: [...prevState.mapViewData, { uri: ellipse, x: (socketData.drone.map.x), y: (socketData.drone.map.y) }]
+        }))
+        if (socketData && socketData.objects.length) {
             socketData.objects.map((object, index) => {
                 this.setState(prevState => ({
-                    logData: [...prevState.logData, { deviation: object.log.deviation.isFound, message: object.log.message }]
+                    logData: [...prevState.logData, { deviation: object.log.deviation.isFound, message: object.log.message }],
+                    mapViewData: [...prevState.mapViewData, { uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y) }]
+                }))
+            })
+            socketData.objects.map((object, index) => {
+                this.setState(prevState => ({
+                    mapViewData: [...prevState.mapViewData, { uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y) }]
                 }))
             })
             this.setState(prevState => ({
@@ -96,56 +92,47 @@ class Dashboard extends React.Component {
     }
 
     render () {
-        if (this.state.socketData) {
-            this.handleMapViewData()
-        }
 
         return (
-        <Grid container alignItems="center">
-         <Grid item xs={12}>
-            <Box display="flex" flexDirection="column">
-                <AppBar position="fixed">
-                    <AppHeader />
-                </AppBar>
-                {!this.state.socketData &&
-                <Box mt={20} mx={150} zIndex={1} justifyContent="center">
-                  <CircularProgress style={{'color': 'white'}}/>
-                   </Box>
-                }
-                {this.state.socketData &&
-                <Box display="flex" flexDirection="row" mx={22} mt={20} zIndex={1}>
-                    <Box width="534px" mr={4}>
-                        <Box height="35px" color="white.200">
-                            <Typography variant="h3">Camera view</Typography>
-                        </Box>
-                        <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
-                            <Video droneData={this.state.socketData.drone} droneObjectCount={this.state.socketData.objects.length} />
-                        </Box>
-                    </Box>
-                    <Box width="500px" mr={4}>
-                        <Box height="35px" color="white.200">
-                            <Typography variant="h3">GPS view</Typography>
-                        </Box>
-                        <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
-                            <Map mapViewDetails={this.mapViewData} />
-                        </Box>
-                    </Box>
-                    <Box width="398px" mr={4}>
-                        <Box height="35px" color="white.200">
-                            <Typography variant="h3">Logs</Typography>
-                        </Box>
-                        <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
-                            <Scrollbars
-                                renderThumbVertical={({ style, ...props }) =>
-                                    <Box mr={3} mt={3} mb={3} {...props} width="4px" bgcolor="white.200" borderRadius="5px" />}
-                            >
-                                <Log message={this.state.logData} />
-                            </Scrollbars>
+            <Grid container alignItems="center">
+                <Grid item xs={12}>
+                    <Box display="flex" flexDirection="column">
+                        <AppBar position="fixed">
+                            <AppHeader />
+                        </AppBar>
+                        <Box display="flex" flexDirection="row" mx={22} mt={20} zIndex={1}>
+                            <Box width="534px" mr={4}>
+                                <Box height="35px" color="white.200">
+                                    <Typography variant="h3">Camera view</Typography>
+                                </Box>
+                                <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
+                                    <Video droneData={this.state.socketData && this.state.socketData.drone} droneObjectCount={this.state.socketData && this.state.socketData.objects.length} />
+                                </Box>
+                            </Box>
+                            <Box width="500px" mr={4}>
+                                <Box height="35px" color="white.200">
+                                    <Typography variant="h3">GPS view</Typography>
+                                </Box>
+                                <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
+                                    <Map mapViewDetails={this.state.mapViewData} />
+                                </Box>
+                            </Box>
+                            <Box width="398px" mr={4}>
+                                <Box height="35px" color="white.200">
+                                    <Typography variant="h3">Logs</Typography>
+                                </Box>
+                                <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
+                                    <Scrollbars
+                                        renderThumbVertical={({ style, ...props }) =>
+                                            <Box mr={3} mt={3} mb={3} {...props} width="4px" bgcolor="white.200" borderRadius="5px" />}
+                                    >
+                                        <Log message={this.state.logData} />
+                                    </Scrollbars>
+                                </Box>
+                            </Box>
                         </Box>
                     </Box>
-                </Box>}
-            </Box>
-            </Grid>
+                </Grid>
             </Grid>
         )
     }
