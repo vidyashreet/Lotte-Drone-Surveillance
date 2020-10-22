@@ -60,8 +60,8 @@ class Canvas extends PureComponent {
         ctx.beginPath()
         ctx.font = '10px Arial'
         ctx.fillStyle = '#DADCE0'
-        ctx.fillText('z', 40, 190)
-        ctx.fillText('x', 27, 205)
+        ctx.fillText('z', 39, 286)
+        ctx.fillText('x', 27, 300)
         ctx.fillText('5m', 320, 313)
         ctx.fillText('5m', 335, 300)
         for (let x = 0; x < w; x += 35) {
