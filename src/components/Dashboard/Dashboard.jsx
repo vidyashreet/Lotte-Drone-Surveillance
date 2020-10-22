@@ -71,6 +71,9 @@ class Dashboard extends PureComponent {
             mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }]
         }))
         this.setState(prevState => ({
+            logData: [...prevState.logData, { 'break': true }]
+        }))
+        this.setState(prevState => ({
             mapViewData: [...prevState.mapViewData, { uri: ellipse, x: (socketData.drone.map.x), y: (socketData.drone.map.y) }]
         }))
         if (socketData && socketData.objects.length) {
@@ -85,9 +88,6 @@ class Dashboard extends PureComponent {
                     mapViewData: [...prevState.mapViewData, { uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y) }]
                 }))
             })
-            this.setState(prevState => ({
-                logData: [...prevState.logData, { 'break': true }]
-            }))
         }
     }
 

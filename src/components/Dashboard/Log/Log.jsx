@@ -23,7 +23,7 @@ class Log extends PureComponent {
                 {this.props.message.length ? (
                     <Box display="flex" flexDirection="column" p={4}>
                         {
-                            this.props.message.map((listData, index) =>
+                            this.props.message.reverse().map((listData, index) =>
                                 <Box key={index} color={listData.deviation ? 'red.600' : 'white.100'}>
                                     {listData.break ? <br /> : listData.message}
                                 </Box>
