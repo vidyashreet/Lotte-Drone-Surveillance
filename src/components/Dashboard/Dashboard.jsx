@@ -48,7 +48,7 @@ class Dashboard extends PureComponent {
     constructor (props) {
         super(props)
 
-        //this.mapViewData = [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
+        // this.mapViewData = [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
 
         this.state = {
             socketData: undefined,
