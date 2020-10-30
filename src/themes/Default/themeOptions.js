@@ -131,7 +131,7 @@ const props = {
     MuiSkeleton: { ...muiSkeletonProps }
 }
 
-const themeName = 'New WileyPLUS'
+const themeName = 'Lotte'
 
 // Create theme object
 const theme = createMuiTheme({

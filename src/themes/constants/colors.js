@@ -4,6 +4,7 @@
 // eg https://www.figma.com/file/TvnfcR4b15UPsSTVAxy0EK/Wiley-Design-System?node-id=160%3A8
 const white100 = '#FFFFFF'
 const white200 = '#DADCE0'
+const white300 = '#ADACAC'
 const blue50 = '#DFF6FF'
 const blue500 = '#1F2941'
 const indigo900 = '#46A048'
@@ -98,7 +99,8 @@ export const yellow = {
 // THEME PALETTE `white` OBJECT
 export const white = {
     100: white100,
-    200: white200
+    200: white200,
+    300: white300
 }
 
 // THEME PALETTE `orange` OBJECT

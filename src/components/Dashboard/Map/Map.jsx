@@ -20,12 +20,16 @@ class Map extends PureComponent {
     }
 
     render () {
-        const { mapViewDetails } = this.props
+        const { mapViewDetails, prodMode } = this.props
         return (
             <>
-                <Box display="flex" flexDirection="column" color="white.100" p={5}>
-                    <Canvas width="350" height="315" color="#DADCE0" mapViewData={mapViewDetails} />
-                </Box>
+                <Grid container justify="center" alignItems="center">
+                    <Grid item xs={12} style={{ textAlign: 'center' }}>
+                        <Box color="white.100" p={5} justifyContent="center">
+                            <Canvas width="350px" height="315" color="#DADCE0" mapViewData={mapViewDetails} />
+                        </Box>
+                    </Grid>
+                </Grid>
                 <Box color="white.200">
                     <Grid
                         container
@@ -43,6 +47,7 @@ class Map extends PureComponent {
                                 </Box>
                             </Box>
                         </Grid>
+                        {!prodMode &&
                         <Grid item xs={4}>
                             <Box display="flex" flexDirection="row">
                                 <Box pr={2} pt={1}>
@@ -52,7 +57,7 @@ class Map extends PureComponent {
                                     <Typography variant="caption">Modified GPS</Typography>
                                 </Box>
                             </Box>
-                        </Grid>
+                        </Grid>}
                         <Grid item xs={3}>
                             <Box display="flex" flexDirection="row">
                                 <Box pr={2} pt={1}>
@@ -71,7 +76,8 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-    mapViewDetails: PropTypes.array
+    mapViewDetails: PropTypes.array,
+    prodMode: PropTypes.bool
 }
 
 export default Map

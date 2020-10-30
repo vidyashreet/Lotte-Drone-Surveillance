@@ -7,6 +7,7 @@ import Map from './Map/Map'
 import AppHeader from './AppHeader'
 import AppBar from '@material-ui/core/AppBar'
 import { connect } from '../../api/socket-service'
+import { refreshToken } from '../../api/login'
 import {
     ellipse, blueCross, yellowCross, whiteCross, greyCross, arrowLeft, arrowTop, deviationBlue, deviationYellow, deviationWhite, deviationGrey
 } from '../../assets'
@@ -48,21 +49,31 @@ class Dashboard extends PureComponent {
     constructor (props) {
         super(props)
 
-        // this.mapViewData = [{ uri: arrowLeft, x: 16, y: 182 }, { uri: arrowTop, x: 26, y: 174 }]
+        this.refreshInterval = setInterval(() => {
+            this.refreshToken()
+        }, 1500000)
 
         this.state = {
             socketData: undefined,
             logData: [],
-            mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }]
+            mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }],
+            isProdMode: false
         }
 
         this.handleDashboardData = this.handleDashboardData.bind(this)
+        this.handleChangeEnvironment = this.handleChangeEnvironment.bind(this)
+        this.refreshToken = this.refreshToken.bind(this)
+
         connect(message => {
             if (message.drone) {
                 this.setState({ socketData: message })
                 this.handleDashboardData()
             }
         })
+    }
+
+    handleChangeEnvironment () {
+        this.setState({ isProdMode: !this.state.isProdMode })
     }
 
     handleDashboardData () {
@@ -83,12 +94,32 @@ class Dashboard extends PureComponent {
                     mapViewData: [...prevState.mapViewData, { uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y) }]
                 }))
             })
-            socketData.objects.map((object, index) => {
-                this.setState(prevState => ({
-                    mapViewData: [...prevState.mapViewData, { uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y) }]
-                }))
-            })
+            if (!this.state.prodMode) {
+                socketData.objects.map((object, index) => {
+                    this.setState(prevState => ({
+                        mapViewData: [...prevState.mapViewData, { uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y) }]
+                    }))
+                })
+            }
         }
+    }
+
+    refreshToken () {
+        refreshToken().then(response => {
+            alert('Session refreshed')
+            Cookies.set('token', response.data.access_token)
+        })
+            .catch(err => {
+                if (err.response && err.response.data.msg === 'Invalid Token') {
+                    alert('Session expired login to continue')
+                    Cookies.set('token', null)
+                    this.props.history.push('/')
+                }
+            })
+    }
+
+    componentWillUnmount () {
+        clearInterval(this.refreshInterval)
     }
 
     render () {
@@ -98,10 +129,10 @@ class Dashboard extends PureComponent {
                 <Grid item xs={12}>
                     <Box display="flex" flexDirection="column">
                         <AppBar position="fixed">
-                            <AppHeader />
+                            <AppHeader changeEnvironment={this.handleChangeEnvironment} prodMode={this.state.isProdMode} />
                         </AppBar>
                         <Box display="flex" flexDirection="row" mx={22} mt={20} zIndex={1}>
-                            <Box width="534px" mr={4}>
+                            <Box width="45%" mr={4}>
                                 <Box height="35px" color="white.200">
                                     <Typography variant="h3">Camera view</Typography>
                                 </Box>
@@ -109,14 +140,15 @@ class Dashboard extends PureComponent {
                                     <Video droneData={this.state.socketData && this.state.socketData.drone} droneObjectCount={this.state.socketData && this.state.socketData.objects.length} />
                                 </Box>
                             </Box>
-                            <Box width="500px" mr={4}>
+                            <Box width="45%" mr={4}>
                                 <Box height="35px" color="white.200">
                                     <Typography variant="h3">GPS view</Typography>
                                 </Box>
                                 <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
-                                    <Map mapViewDetails={this.state.mapViewData} />
+                                    <Map mapViewDetails={this.state.mapViewData} prodMode={this.state.isProdMode} />
                                 </Box>
                             </Box>
+                            {!this.state.isProdMode &&
                             <Box width="398px" mr={4}>
                                 <Box height="35px" color="white.200">
                                     <Typography variant="h3">Logs</Typography>
@@ -129,7 +161,7 @@ class Dashboard extends PureComponent {
                                         <Log message={this.state.logData} />
                                     </Scrollbars>
                                 </Box>
-                            </Box>
+                            </Box>}
                         </Box>
                     </Box>
                 </Grid>

@@ -20,19 +20,19 @@ class Video extends PureComponent {
     }
 
     render () {
-        const surveillanceUrl = this.state.isTrajectories ? 'http://18.189.160.225:1937/video' : 'http://18.189.160.225:1937/video'
+        const surveillanceUrl = this.state.isTrajectories ? '/video' : '/video'
         const { droneData, droneObjectCount } = this.props
 
         return (
             <Box display="flex" flexDirection="column" color="white.100">
-                <Box height="340px">
+                <Box height="320px" mb={5}>
                     <Iframe
                         url={surveillanceUrl}
                         className="video-frame"
                         display="initial"
                         position="relative"
-                        height="320"
-                        width="400"
+                        height="100%"
+                        width="100%"
                         frameBorder="0"
                     />
                 </Box>

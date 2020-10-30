@@ -20,7 +20,7 @@ export const h1 = {
     lineHeight: 1.42,
     fontWeight: fontWeightLight,
     [mediumWidthBreakpoint]: {
-        fontSize: '3rem',
+        fontSize: '2rem',
         lineHeight: 1.33
     }
 }
