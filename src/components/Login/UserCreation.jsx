@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import {
     Box, Typography, Grid, TextField, Button
 } from '@material-ui/core'
-import { connect } from '../../api/socket-service'
 import { createUser } from '../../api/login'
 
 class UserCreation extends PureComponent {

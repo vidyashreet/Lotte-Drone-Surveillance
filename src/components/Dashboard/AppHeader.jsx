@@ -31,13 +31,13 @@ class AppHeader extends PureComponent {
 
     handleLogout () {
         logout().then(response => {
-            Cookies.set('token', null)
+            Cookies.remove('token')
             this.props.history.push('/')
         })
             .catch(err => {
                 if (err.response && err.response.data.msg === 'Invalid Token') {
                     alert('Session expired login to continue')
-                    Cookies.set('token', null)
+                    Cookies.remove('token')
                     this.props.history.push('/')
                 }
             })

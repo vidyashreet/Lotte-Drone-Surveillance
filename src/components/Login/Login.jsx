@@ -2,10 +2,9 @@ import React, { PureComponent } from 'react'
 import {
     Box, Typography, Grid, TextField, Button
 } from '@material-ui/core'
-import { connect } from '../../api/socket-service'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
-import { loginUser, refreshToken } from '../../api/login'
+import { loginUser } from '../../api/login'
 import PropTypes from 'prop-types'
 
 import Cookies from 'js-cookie'
@@ -25,7 +24,7 @@ class Login extends PureComponent {
     }
 
     handleLogin () {
-        Cookies.set('token', null)
+        Cookies.remove('token')
         event.preventDefault()
         const loginDetails = {
             userId: this.state.loginDetails.userId,

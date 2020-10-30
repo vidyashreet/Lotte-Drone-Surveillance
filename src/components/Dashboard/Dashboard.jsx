@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Box, Typography, CircularProgress, Grid } from '@material-ui/core'
+import { Box, Typography, Grid } from '@material-ui/core'
 import { Scrollbars } from 'react-custom-scrollbars'
 import Video from './Video/Video'
 import Log from './Log/Log'
@@ -112,7 +112,7 @@ class Dashboard extends PureComponent {
             .catch(err => {
                 if (err.response && err.response.data.msg === 'Invalid Token') {
                     alert('Session expired login to continue')
-                    Cookies.set('token', null)
+                    Cookies.remove('token')
                     this.props.history.push('/')
                 }
             })
