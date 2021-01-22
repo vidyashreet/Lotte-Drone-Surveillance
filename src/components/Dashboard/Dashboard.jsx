@@ -57,7 +57,7 @@ class Dashboard extends PureComponent {
             socketData: undefined,
             logData: [],
             mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }],
-            isProdMode: false
+            isProdMode: true
         }
 
         this.handleDashboardData = this.handleDashboardData.bind(this)
@@ -69,11 +69,17 @@ class Dashboard extends PureComponent {
                 this.setState({ socketData: message })
                 this.handleDashboardData()
             }
-        })
+        }, this.state.isProdMode)
     }
 
     handleChangeEnvironment () {
         this.setState({ isProdMode: !this.state.isProdMode })
+        connect(message => {
+            if (message.drone) {
+                this.setState({ socketData: message })
+                this.handleDashboardData()
+            }
+        }, !this.state.isProdMode)
     }
 
     handleDashboardData () {

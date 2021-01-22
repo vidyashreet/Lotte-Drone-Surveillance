@@ -12,10 +12,16 @@ const socket = openSocket('', {
     }
 })
 
-function connect (cb) {
-    socket.on('telemetric response', message => {
-        cb(message)
-    })
+function connect (cb, isProdMode) {
+    if (isProdMode) {
+        socket.on('telemetric response', message => {
+            cb(message)
+        })
+    } else {
+        socket.on('telemetric response test', message => {
+            cb(message)
+        })
+    }
 }
 
 export { connect }
