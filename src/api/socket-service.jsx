@@ -1,8 +1,7 @@
 import openSocket from 'socket.io-client'
 import Cookies from 'js-cookie'
-
-const socket = openSocket('', {
-    path: '/',
+const BaseUrl = window.location.protocol + "//" + window.location.hostname;
+const socket = openSocket(`${BaseUrl}:1936/`, {
     transportOptions: {
         polling: {
             extraHeaders: {
