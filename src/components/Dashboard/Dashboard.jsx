@@ -18,6 +18,8 @@ const deviationImages = [{ image: deviationBlue }, { image: deviationYellow }, {
 const data = {
     token: 'dsddsad',
     drone: { id: 'fdfdf', name: 'Drone name here', height: { data: 10, unit: 'meter' }, map: { x: 20, y: 50 } },
+    mle: { data : 2.23, unit: "meter"},
+    logFormat:"yyyymmdd,hh:mm:ss.Obj{​​​​​​​id}​​​​​​​.{​​​​​​​distance}​​​​​​​: {​​​​​​​le}​​​​​​​",
     objects: [{
         type: 'pedestrian',
         id: 1,
@@ -25,9 +27,10 @@ const data = {
         log: {
             originalMetrics: { map: { x: 18, y: 48 }, distance: { data: 9, unit: 'meter' }, direction: { data: 8, unit: 'degree' }, gps: { longitude: 76.5997653, latitude: 11.4466737 } },
             deviation: {
-                isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter' }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
+                isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter', mle: 1.8 }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
             },
-            message: '<red>Obj(1) measured distance 10 m vs 9m, 10 deg vs 8 deg at Error rate 5% <red>'
+            message: '<red>Obj(1) measured distance 10 m vs 9m, 10 deg vs 8 deg at Error rate 5% <red>',
+            format:"yyyymmdd,hh:mm:ss.Obj{id}.{distance}: {le}"
         },
         metrics: { distance: { data: 3.61, unit: 'meter' }, direction: { data: 10, unit: 'degree' }, gps: { longitude: 77.5997653, latitude: 11.4466737 } }
     }, {
@@ -37,9 +40,10 @@ const data = {
         log: {
             originalMetrics: { map: { x: 18, y: 48 }, distance: { data: 9, unit: 'meter' }, direction: { data: 8, unit: 'degree' }, gps: { longitude: 76.5997653, latitude: 11.4466737 } },
             deviation: {
-                isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter' }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
+                isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter', mle: 1.8 }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
             },
-            message: '<red>Obj(1) measured distance 10 m vs 9m, 10 deg vs 8 deg at Error rate 5% <red>'
+            message: '<red>Obj(1) measured distance 10 m vs 9m, 10 deg vs 8 deg at Error rate 5% <red>',
+            format:"yyyymmdd,hh:mm:ss.Obj{id}.{distance}: {le}"
         },
         metrics: { distance: { data: 3.55, unit: 'meter' }, direction: { data: 10, unit: 'degree' }, gps: { longitude: 77.5997653, latitude: 11.4466737 } }
     }]
@@ -56,6 +60,7 @@ class Dashboard extends PureComponent {
         this.state = {
             socketData: undefined,
             logData: [],
+            logDataMle: undefined,
             mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }],
             isProdMode: true
         }
@@ -96,8 +101,9 @@ class Dashboard extends PureComponent {
         if (socketData && socketData.objects.length) {
             socketData.objects.map((object, index) => {
                 this.setState(prevState => ({
-                    logData: [...prevState.logData, { deviation: object.log.deviation.isFound, message: object.log.message }],
-                    mapViewData: [...prevState.mapViewData, { uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y) }]
+                    logData: [...prevState.logData, { deviation: object.log.deviation.isFound, message: object.log.message}],
+                    mapViewData: [...prevState.mapViewData, { uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y) }],
+                    logDataMle: { "mle" : socketData.mle.data, "format": socketData.logFormat, unit: socketData.mle.unit}
                 }))
             })
             if (!this.state.prodMode) {
@@ -164,7 +170,7 @@ class Dashboard extends PureComponent {
                                         renderThumbVertical={({ style, ...props }) =>
                                             <Box mr={3} mt={3} mb={3} {...props} width="4px" bgcolor="white.200" borderRadius="5px" />}
                                     >
-                                        <Log message={this.state.logData} />
+                                        <Log message={this.state.logData} logDateMle={this.state.logDataMle} />
                                     </Scrollbars>
                                 </Box>
                             </Box>}

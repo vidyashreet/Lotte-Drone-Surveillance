@@ -102,7 +102,7 @@ export const overline = {
 }
 
 export const caption = {
-    fontSize: '0.8rem',
+    fontSize: '0.9rem',
     lineHeight: 0,
     fontWeight: fontWeightRegular
 }
