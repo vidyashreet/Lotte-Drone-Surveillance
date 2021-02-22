@@ -17,15 +17,16 @@ const deviationImages = [{ image: deviationBlue }, { image: deviationYellow }, {
 
 const data = {
     token: 'dsddsad',
-    drone: { id: 'fdfdf', name: 'Drone name here', height: { data: 10, unit: 'meter' }, map: { x: 20, y: 50 } },
+    drone: { id: 'fdfdf', name: 'Drone name here', height: { data: 10, unit: 'meter' }, map: { x: 80, y: 100 } },
     mle: { data : 2.23, unit: "meter"},
     logFormat:"yyyymmdd,hh:mm:ss.Obj{​​​​​​​id}​​​​​​​.{​​​​​​​distance}​​​​​​​: {​​​​​​​le}​​​​​​​",
     objects: [{
         type: 'pedestrian',
         id: 1,
+        colorHexa: '#e10a34',
         map: { x: 20, y: 46.39308736141907 },
         log: {
-            originalMetrics: { map: { x: 18, y: 48 }, distance: { data: 9, unit: 'meter' }, direction: { data: 8, unit: 'degree' }, gps: { longitude: 76.5997653, latitude: 11.4466737 } },
+            originalMetrics: { map: { x: 30, y: 80 }, distance: { data: 9, unit: 'meter' }, direction: { data: 8, unit: 'degree' }, gps: { longitude: 76.5997653, latitude: 11.4466737 } },
             deviation: {
                 isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter', mle: 1.8 }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
             },
@@ -36,9 +37,10 @@ const data = {
     }, {
         type: 'pedestrian',
         id: 2,
+        colorHexa: '#0000ff',
         map: { x: 150, y: 46.45194233502538 },
         log: {
-            originalMetrics: { map: { x: 18, y: 48 }, distance: { data: 9, unit: 'meter' }, direction: { data: 8, unit: 'degree' }, gps: { longitude: 76.5997653, latitude: 11.4466737 } },
+            originalMetrics: { map: { x: 50, y: 90 }, distance: { data: 9, unit: 'meter' }, direction: { data: 8, unit: 'degree' }, gps: { longitude: 76.5997653, latitude: 11.4466737 } },
             deviation: {
                 isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter', mle: 1.8 }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
             },
@@ -72,7 +74,7 @@ class Dashboard extends PureComponent {
         connect(message => {
             if (message.drone) {
                 this.setState({ socketData: message })
-                this.handleDashboardData()
+                this.handleDashboardData(this.state.isProdMode)
             }
         }, this.state.isProdMode)
     }
@@ -82,12 +84,12 @@ class Dashboard extends PureComponent {
         connect(message => {
             if (message.drone) {
                 this.setState({ socketData: message })
-                this.handleDashboardData()
+                this.handleDashboardData(!this.state.isProdMode)
             }
         }, !this.state.isProdMode)
     }
 
-    handleDashboardData () {
+    handleDashboardData (prodMode) {
         const { socketData } = this.state
         this.setState(prevState => ({
             mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }]
@@ -102,14 +104,14 @@ class Dashboard extends PureComponent {
             socketData.objects.map((object, index) => {
                 this.setState(prevState => ({
                     logData: [...prevState.logData, { deviation: object.log.deviation.isFound, message: object.log.message}],
-                    mapViewData: [...prevState.mapViewData, { uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y) }],
+                    mapViewData: [...prevState.mapViewData, { uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y), id: object.id, deviation: false, color: object.colorHexa }],
                     logDataMle: { "mle" : socketData.mle.data, "format": socketData.logFormat, unit: socketData.mle.unit}
                 }))
             })
-            if (!this.state.prodMode) {
+            if (!prodMode) {
                 socketData.objects.map((object, index) => {
                     this.setState(prevState => ({
-                        mapViewData: [...prevState.mapViewData, { uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y) }]
+                        mapViewData: [...prevState.mapViewData, { uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y), id: object.id, deviation: true, color: object.colorHexa }]
                     }))
                 })
             }

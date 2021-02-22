@@ -37,13 +37,53 @@ class Canvas extends PureComponent {
         }
         ctx.strokeStyle = '#DADCE0'
         ctx.stroke()
-        mapViewData.map(image => {
+//         mapViewData.map(image => {
+//             const droneImg = new Image()
+//             droneImg.onload = function () {
+//                 ctx.drawImage(this, image.x, image.y, 20, 20)
+//             }
+//             droneImg.src = image.uri
+//         })
+        mapViewData.map((image, index) => {
+        if(index > 2) {
+            if(!image.deviation) {
+                ctx.beginPath();
+                ctx.moveTo(image.x, image.y);
+                ctx.lineTo(image.x+15, image.y+15);
+                ctx.closePath();
+                ctx.strokeStyle = image.color;
+                ctx.lineWidth = 5;
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(image.x+15, image.y);
+                ctx.lineTo(image.x, image.y+15);
+                ctx.closePath();
+                ctx.stroke();
+                ctx.fillText(image.id, image.x+5, image.y+27)
+                ctx.font = 'bold 8pt Arial'
+                }
+                else {
+                ctx.beginPath();
+                ctx.rect(image.x, image.y, 3, 23);
+                ctx.strokeStyle = image.color;
+                ctx.lineWidth = 2;
+                ctx.closePath();
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.rect(image.x-10, image.y+10, 23, 3);
+                ctx.strokeStyle = image.color;
+                ctx.closePath();
+                ctx.stroke();
+                }
+        }
+        else {
             const droneImg = new Image()
             droneImg.onload = function () {
                 ctx.drawImage(this, image.x, image.y, 20, 20)
             }
             droneImg.src = image.uri
-        })
+        }
+       })
     }
 
     componentDidUpdate () {
@@ -64,6 +104,7 @@ class Canvas extends PureComponent {
         ctx.fillText('x', 27, 300)
         ctx.fillText('5m', 320, 313)
         ctx.fillText('5m', 335, 300)
+        ctx.lineWidth = 1;
         for (let x = 0; x < w; x += 35) {
             if (x === 0) {
                 ctx.moveTo(x, 0)
@@ -85,13 +126,46 @@ class Canvas extends PureComponent {
         }
         ctx.strokeStyle = '#DADCE0'
         ctx.stroke()
-        mapViewData.map(image => {
+        mapViewData.map((image, index) => {
+        if(index > 2) {
+            if(!image.deviation) {
+                ctx.beginPath();
+                ctx.moveTo(image.x, image.y);
+                ctx.lineTo(image.x+15, image.y+15);
+                ctx.closePath();
+                ctx.strokeStyle = image.color;
+                ctx.lineWidth = 5;
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(image.x+15, image.y);
+                ctx.lineTo(image.x, image.y+15);
+                ctx.closePath();
+                ctx.stroke();
+                ctx.fillText(image.id, image.x+5, image.y+27)
+                ctx.font = 'bold 8pt Arial'
+                }
+                else {
+                ctx.beginPath();
+                ctx.rect(image.x, image.y, 3, 23);
+                ctx.strokeStyle = image.color;
+                ctx.lineWidth = 2;
+                ctx.closePath();
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.rect(image.x-10, image.y+10, 23, 3);
+                ctx.strokeStyle = image.color;
+                ctx.closePath();
+                ctx.stroke();
+                }
+        }
+        else {
             const droneImg = new Image()
             droneImg.onload = function () {
                 ctx.drawImage(this, image.x, image.y, 20, 20)
             }
             droneImg.src = image.uri
-        })
+        }
+       })
     }
 
     render () {
