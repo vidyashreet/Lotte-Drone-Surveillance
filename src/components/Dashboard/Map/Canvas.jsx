@@ -3,7 +3,6 @@ import Box from '@material-ui/core/Box'
 import PropTypes from 'prop-types'
 
 class Canvas extends PureComponent {
-
     componentDidMount () {
         const { mapViewData } = this.props
         const { canvas } = this.refs
@@ -37,53 +36,51 @@ class Canvas extends PureComponent {
         }
         ctx.strokeStyle = '#DADCE0'
         ctx.stroke()
-//         mapViewData.map(image => {
-//             const droneImg = new Image()
-//             droneImg.onload = function () {
-//                 ctx.drawImage(this, image.x, image.y, 20, 20)
-//             }
-//             droneImg.src = image.uri
-//         })
+        //         mapViewData.map(image => {
+        //             const droneImg = new Image()
+        //             droneImg.onload = function () {
+        //                 ctx.drawImage(this, image.x, image.y, 20, 20)
+        //             }
+        //             droneImg.src = image.uri
+        //         })
         mapViewData.map((image, index) => {
-        if(index > 2) {
-            if(!image.deviation) {
-                ctx.beginPath();
-                ctx.moveTo(image.x, image.y);
-                ctx.lineTo(image.x+15, image.y+15);
-                ctx.closePath();
-                ctx.strokeStyle = image.color;
-                ctx.lineWidth = 5;
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(image.x+15, image.y);
-                ctx.lineTo(image.x, image.y+15);
-                ctx.closePath();
-                ctx.stroke();
-                ctx.fillText(image.id, image.x+5, image.y+27)
-                ctx.font = 'bold 8pt Arial'
+            if (index > 2) {
+                if (!image.deviation) {
+                    ctx.beginPath();
+                    ctx.moveTo(image.x, image.y);
+                    ctx.lineTo(image.x + 15, image.y + 15);
+                    ctx.closePath();
+                    ctx.strokeStyle = image.color;
+                    ctx.lineWidth = 5;
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(image.x + 15, image.y);
+                    ctx.lineTo(image.x, image.y + 15);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fillText(image.id, image.x + 5, image.y + 27)
+                    ctx.font = 'bold 8pt Arial'
+                } else {
+                    ctx.beginPath();
+                    ctx.rect(image.x, image.y, 3, 23);
+                    ctx.strokeStyle = image.color;
+                    ctx.lineWidth = 2;
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.rect(image.x - 10, image.y + 10, 23, 3);
+                    ctx.strokeStyle = image.color;
+                    ctx.closePath();
+                    ctx.stroke();
                 }
-                else {
-                ctx.beginPath();
-                ctx.rect(image.x, image.y, 3, 23);
-                ctx.strokeStyle = image.color;
-                ctx.lineWidth = 2;
-                ctx.closePath();
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.rect(image.x-10, image.y+10, 23, 3);
-                ctx.strokeStyle = image.color;
-                ctx.closePath();
-                ctx.stroke();
+            } else {
+                const droneImg = new Image()
+                droneImg.onload = function () {
+                    ctx.drawImage(this, image.x, image.y, 20, 20)
                 }
-        }
-        else {
-            const droneImg = new Image()
-            droneImg.onload = function () {
-                ctx.drawImage(this, image.x, image.y, 20, 20)
+                droneImg.src = image.uri
             }
-            droneImg.src = image.uri
-        }
-       })
+        })
     }
 
     componentDidUpdate () {
@@ -127,52 +124,50 @@ class Canvas extends PureComponent {
         ctx.strokeStyle = '#DADCE0'
         ctx.stroke()
         mapViewData.map((image, index) => {
-        if(index > 2) {
-            if(!image.deviation) {
-                ctx.beginPath();
-                ctx.moveTo(image.x, image.y);
-                ctx.lineTo(image.x+15, image.y+15);
-                ctx.closePath();
-                ctx.strokeStyle = image.color;
-                ctx.lineWidth = 5;
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(image.x+15, image.y);
-                ctx.lineTo(image.x, image.y+15);
-                ctx.closePath();
-                ctx.stroke();
-                ctx.fillText(image.id, image.x+5, image.y+27)
-                ctx.font = 'bold 8pt Arial'
+            if (index > 2) {
+                if (!image.deviation) {
+                    ctx.beginPath();
+                    ctx.moveTo(image.x, image.y);
+                    ctx.lineTo(image.x + 15, image.y + 15);
+                    ctx.closePath();
+                    ctx.strokeStyle = image.color;
+                    ctx.lineWidth = 5;
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(image.x + 15, image.y);
+                    ctx.lineTo(image.x, image.y + 15);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fillText(image.id, image.x + 5, image.y + 27)
+                    ctx.font = 'bold 8pt Arial'
+                } else {
+                    ctx.beginPath();
+                    ctx.rect(image.x, image.y, 3, 23);
+                    ctx.strokeStyle = image.color;
+                    ctx.lineWidth = 2;
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.rect(image.x - 10, image.y + 10, 23, 3);
+                    ctx.strokeStyle = image.color;
+                    ctx.closePath();
+                    ctx.stroke();
                 }
-                else {
-                ctx.beginPath();
-                ctx.rect(image.x, image.y, 3, 23);
-                ctx.strokeStyle = image.color;
-                ctx.lineWidth = 2;
-                ctx.closePath();
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.rect(image.x-10, image.y+10, 23, 3);
-                ctx.strokeStyle = image.color;
-                ctx.closePath();
-                ctx.stroke();
+            } else {
+                const droneImg = new Image()
+                droneImg.onload = function () {
+                    ctx.drawImage(this, image.x, image.y, 20, 20)
                 }
-        }
-        else {
-            const droneImg = new Image()
-            droneImg.onload = function () {
-                ctx.drawImage(this, image.x, image.y, 20, 20)
+                droneImg.src = image.uri
             }
-            droneImg.src = image.uri
-        }
-       })
+        })
     }
 
     render () {
         const { width, height } = this.props
         return (
             <Box>
-                <canvas ref="canvas" width={width} height={height} />
+                <canvas ref="canvas" width={ width } height={ height } />
             </Box>
         )
     }

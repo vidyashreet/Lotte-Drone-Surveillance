@@ -24,9 +24,9 @@ class Map extends PureComponent {
         return (
             <>
                 <Grid container justify="center" alignItems="center">
-                    <Grid item xs={12} style={{ textAlign: 'center' }}>
-                        <Box color="white.100" p={5} justifyContent="center">
-                            <Canvas width="350px" height="315" color="#DADCE0" mapViewData={mapViewDetails} />
+                    <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                        <Box color="white.100" p={ 5 } justifyContent="center">
+                            <Canvas width="350px" height="315" color="#DADCE0" mapViewData={ mapViewDetails } />
                         </Box>
                     </Grid>
                 </Grid>
@@ -37,33 +37,33 @@ class Map extends PureComponent {
                         justify="flex-end"
                         alignItems="flex-end"
                     >
-                        <Grid item xs={3}>
+                        <Grid item xs={ 3 }>
                             <Box display="flex" flexDirection="row">
-                                <Box pr={2} pt={1}>
-                                    <img src={ellipse} width="15px" />
+                                <Box pr={ 2 } pt={ 1 }>
+                                    <img src={ ellipse } width="15px" />
                                 </Box>
-                                <Box pt={0.5}>
+                                <Box pt={ 0.5 }>
                                     <Typography variant="caption">Drone</Typography>
                                 </Box>
                             </Box>
                         </Grid>
                         {!prodMode &&
-                        <Grid item xs={4}>
+                        <Grid item xs={ 4 }>
                             <Box display="flex" flexDirection="row">
-                                <Box pr={2} pt={1}>
-                                    <img src={modifiedPlus} width="13px" height="13px" />
+                                <Box pr={ 2 } pt={ 1 }>
+                                    <img src={ modifiedPlus } width="13px" height="13px" />
                                 </Box>
-                                <Box pt={0.5}>
+                                <Box pt={ 0.5 }>
                                     <Typography variant="caption">Modified GPS</Typography>
                                 </Box>
                             </Box>
                         </Grid>}
-                        <Grid item xs={3}>
+                        <Grid item xs={ 3 }>
                             <Box display="flex" flexDirection="row">
-                                <Box pr={2} pt={1}>
-                                    <img src={crossFill} width="13px" height="13px" />
+                                <Box pr={ 2 } pt={ 1 }>
+                                    <img src={ crossFill } width="13px" height="13px" />
                                 </Box>
-                                <Box pt={0.5}>
+                                <Box pt={ 0.5 }>
                                     <Typography variant="caption">Our system</Typography>
                                 </Box>
                             </Box>

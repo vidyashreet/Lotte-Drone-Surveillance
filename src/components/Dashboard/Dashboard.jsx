@@ -12,15 +12,15 @@ import {
     ellipse, blueCross, yellowCross, whiteCross, greyCross, arrowLeft, arrowTop, deviationBlue, deviationYellow, deviationWhite, deviationGrey
 } from '../../assets'
 
-const objectsImages = [{ image: blueCross }, { image: yellowCross }, { image: whiteCross }, { image: greyCross }]
-const deviationImages = [{ image: deviationBlue }, { image: deviationYellow }, { image: deviationWhite }, { image: deviationGrey }]
+const objectsImages = [ { image: blueCross }, { image: yellowCross }, { image: whiteCross }, { image: greyCross } ]
+const deviationImages = [ { image: deviationBlue }, { image: deviationYellow }, { image: deviationWhite }, { image: deviationGrey } ]
 
 const data = {
     token: 'dsddsad',
     drone: { id: 'fdfdf', name: 'Drone name here', height: { data: 10, unit: 'meter' }, map: { x: 80, y: 100 } },
-    mle: { data : 2.23, unit: "meter"},
-    logFormat:"yyyymmdd,hh:mm:ss.Obj{​​​​​​​id}​​​​​​​.{​​​​​​​distance}​​​​​​​: {​​​​​​​le}​​​​​​​",
-    objects: [{
+    mle: { data: 2.23, unit: 'meter' },
+    logFormat: 'yyyymmdd,hh:mm:ss.Obj{​​​​​​​id}​​​​​​​.{​​​​​​​distance}​​​​​​​: {​​​​​​​le}​​​​​​​',
+    objects: [ {
         type: 'pedestrian',
         id: 1,
         colorHexa: '#e10a34',
@@ -31,7 +31,7 @@ const data = {
                 isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter', mle: 1.8 }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
             },
             message: '<red>Obj(1) measured distance 10 m vs 9m, 10 deg vs 8 deg at Error rate 5% <red>',
-            format:"yyyymmdd,hh:mm:ss.Obj{id}.{distance}: {le}"
+            format: 'yyyymmdd,hh:mm:ss.Obj{id}.{distance}: {le}'
         },
         metrics: { distance: { data: 3.61, unit: 'meter' }, direction: { data: 10, unit: 'degree' }, gps: { longitude: 77.5997653, latitude: 11.4466737 } }
     }, {
@@ -45,10 +45,10 @@ const data = {
                 isFound: true, percentage: 5, 'max-percentage': 5, distance: { data: 1, unit: 'meter', mle: 1.8 }, direction: { data: 2, unit: 'degree' }, gps: { longitude: '01.0000000', latitude: '01.0000000' }
             },
             message: '<red>Obj(1) measured distance 10 m vs 9m, 10 deg vs 8 deg at Error rate 5% <red>',
-            format:"yyyymmdd,hh:mm:ss.Obj{id}.{distance}: {le}"
+            format: 'yyyymmdd,hh:mm:ss.Obj{id}.{distance}: {le}'
         },
         metrics: { distance: { data: 3.55, unit: 'meter' }, direction: { data: 10, unit: 'degree' }, gps: { longitude: 77.5997653, latitude: 11.4466737 } }
-    }]
+    } ]
 }
 
 class Dashboard extends PureComponent {
@@ -63,7 +63,7 @@ class Dashboard extends PureComponent {
             socketData: undefined,
             logData: [],
             logDataMle: undefined,
-            mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }],
+            mapViewData: [ { uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 } ],
             isProdMode: true
         }
 
@@ -92,26 +92,26 @@ class Dashboard extends PureComponent {
     handleDashboardData (prodMode) {
         const { socketData } = this.state
         this.setState(prevState => ({
-            mapViewData: [{ uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 }]
+            mapViewData: [ { uri: arrowLeft, x: 16, y: 279 }, { uri: arrowTop, x: 26, y: 270 } ]
         }))
         this.setState(prevState => ({
-            logData: [...prevState.logData, { 'break': true }]
+            logData: [ ...prevState.logData, { break: true } ]
         }))
         this.setState(prevState => ({
-            mapViewData: [...prevState.mapViewData, { uri: ellipse, x: (socketData.drone.map.x), y: (socketData.drone.map.y) }]
+            mapViewData: [ ...prevState.mapViewData, { uri: ellipse, x: (socketData.drone.map.x), y: (socketData.drone.map.y) } ]
         }))
         if (socketData && socketData.objects.length) {
             socketData.objects.map((object, index) => {
                 this.setState(prevState => ({
-                    logData: [...prevState.logData, { deviation: object.log.deviation.isFound, message: object.log.message}],
-                    mapViewData: [...prevState.mapViewData, { uri: objectsImages[index].image, x: (object.map.x), y: (object.map.y), id: object.id, deviation: false, color: object.colorHexa }],
-                    logDataMle: { "mle" : socketData.mle.data, "format": socketData.logFormat, unit: socketData.mle.unit}
+                    logData: [ ...prevState.logData, { deviation: object.log.deviation.isFound, message: object.log.message } ],
+                    mapViewData: [ ...prevState.mapViewData, { uri: objectsImages[ index % 4 ].image, x: (object.map.x), y: (object.map.y), id: object.id, deviation: false, color: object.colorHexa } ],
+                    logDataMle: { mle: socketData.mle.data, format: socketData.logFormat, unit: socketData.mle.unit }
                 }))
             })
             if (!prodMode) {
                 socketData.objects.map((object, index) => {
                     this.setState(prevState => ({
-                        mapViewData: [...prevState.mapViewData, { uri: deviationImages[index].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y), id: object.id, deviation: true, color: object.colorHexa }]
+                        mapViewData: [ ...prevState.mapViewData, { uri: deviationImages[ index % 4  ].image, x: (object.log.originalMetrics.map.x), y: (object.log.originalMetrics.map.y), id: object.id, deviation: true, color: object.colorHexa } ]
                     }))
                 })
             }
@@ -137,42 +137,41 @@ class Dashboard extends PureComponent {
     }
 
     render () {
-
         return (
             <Grid container alignItems="center">
-                <Grid item xs={12}>
+                <Grid item xs={ 12 }>
                     <Box display="flex" flexDirection="column">
                         <AppBar position="fixed">
-                            <AppHeader changeEnvironment={this.handleChangeEnvironment} prodMode={this.state.isProdMode} />
+                            <AppHeader changeEnvironment={ this.handleChangeEnvironment } prodMode={ this.state.isProdMode } />
                         </AppBar>
-                        <Box display="flex" flexDirection="row" mx={22} mt={20} zIndex={1}>
-                            <Box width="45%" mr={4}>
+                        <Box display="flex" flexDirection="row" mx={ 22 } mt={ 20 } zIndex={ 1 }>
+                            <Box width="45%" mr={ 4 }>
                                 <Box height="35px" color="white.200">
                                     <Typography variant="h3">Camera view</Typography>
                                 </Box>
-                                <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
-                                    <Video droneData={this.state.socketData && this.state.socketData.drone} droneObjectCount={this.state.socketData && this.state.socketData.objects.length} />
+                                <Box height="400px" borderRadius={ 4 } border={ 1 } borderColor="white.200">
+                                    <Video droneData={ this.state.socketData && this.state.socketData.drone } droneObjectCount={ this.state.socketData && this.state.socketData.objects.length } />
                                 </Box>
                             </Box>
-                            <Box width="45%" mr={4}>
+                            <Box width="45%" mr={ 4 }>
                                 <Box height="35px" color="white.200">
                                     <Typography variant="h3">GPS view</Typography>
                                 </Box>
-                                <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
-                                    <Map mapViewDetails={this.state.mapViewData} prodMode={this.state.isProdMode} />
+                                <Box height="400px" borderRadius={ 4 } border={ 1 } borderColor="white.200">
+                                    <Map mapViewDetails={ this.state.mapViewData } prodMode={ this.state.isProdMode } />
                                 </Box>
                             </Box>
                             {!this.state.isProdMode &&
-                            <Box width="398px" mr={4}>
+                            <Box width="398px" mr={ 4 }>
                                 <Box height="35px" color="white.200">
                                     <Typography variant="h3">Logs</Typography>
                                 </Box>
-                                <Box height="400px" borderRadius={4} border={1} borderColor="white.200">
+                                <Box height="400px" borderRadius={ 4 } border={ 1 } borderColor="white.200">
                                     <Scrollbars
-                                        renderThumbVertical={({ style, ...props }) =>
-                                            <Box mr={3} mt={3} mb={3} {...props} width="4px" bgcolor="white.200" borderRadius="5px" />}
+                                        renderThumbVertical={ ({ style, ...props }) =>
+                                            <Box mr={ 3 } mt={ 3 } mb={ 3 } { ...props } width="4px" bgcolor="white.200" borderRadius="5px" /> }
                                     >
-                                        <Log message={this.state.logData} logDateMle={this.state.logDataMle} />
+                                        <Log message={ this.state.logData } logDateMle={ this.state.logDataMle } />
                                     </Scrollbars>
                                 </Box>
                             </Box>}

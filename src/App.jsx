@@ -7,28 +7,27 @@ import Cookies from 'js-cookie'
 
 class App extends PureComponent {
     render () {
-
-        const PrivateRoute = ({ component: Component, ...rest }) => (
+        const PrivateRoute = ({ ...rest }) => (
             <Route
-                {...rest}
-                render={props =>
+                { ...rest }
+                render={ props =>
                     Cookies.get('token') ? (
-                        <Dashboard {...props} />
+                        <Dashboard { ...props } />
                     ) : (
                         <Redirect
-                            to={{
+                            to={ {
                                 pathname: '/'
-                            }}
+                            } }
                         />
-                    )}
+                    ) }
             />
         )
         return (
             <Box display="flex" flexDirection="column" height="100vh">
                 <HashRouter>
                     <Switch>
-                        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                        <Route path="/" component={Home} />
+                        <PrivateRoute exact path="/dashboard" component={ Dashboard } />
+                        <Route path="/" component={ Home } />
                     </Switch>
                 </HashRouter>
             </Box>

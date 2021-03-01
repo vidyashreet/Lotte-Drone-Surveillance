@@ -7,9 +7,5 @@ import theme from './themes/Default/themeOptions'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-    </ThemeProvider>,
-    document.getElementById('root')
+    <ThemeProvider theme={theme}><CssBaseline /><App /></ThemeProvider>, document.getElementById('root')
 )

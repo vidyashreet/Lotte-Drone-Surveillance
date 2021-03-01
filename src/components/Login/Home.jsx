@@ -8,15 +8,15 @@ import UserCreation from './UserCreation'
 
 const styles = theme => ({
     label: {
-        color: theme.palette.white['300'],
+        color: theme.palette.white[ '300' ],
         '&$focusedLabel': {
-            color: theme.palette.white['300']
+            color: theme.palette.white[ '300' ]
         }
     },
     focusedLabel: {},
     erroredLabel: {},
     underline: {
-        color: theme.palette.white['300'],
+        color: theme.palette.white[ '300' ],
         '&:after': {
             borderBottom: '1px solid #fff'
         }
@@ -43,17 +43,17 @@ class Home extends PureComponent {
         const { classes } = this.props
         return (
             <Grid container justify="center" alignItems="center">
-                <Grid item xs={12}>
+                <Grid item xs={ 12 }>
                     <AppBar position="fixed">
                         <Box height="50px" display="flex" flexDirection="row">
                             <Box width="100%" />
-                            <Box pt={2} flexShrink={1} width="20%">
-                                <Button variant="contained" fontSize="small" value="userCreation" onClick={this.handleUserLogin}>
+                            <Box pt={ 2 } flexShrink={ 1 } width="20%">
+                                <Button variant="contained" fontSize="small" value="userCreation" onClick={ this.handleUserLogin }>
                                     Create User
                                 </Button>
                             </Box>
-                            <Box pt={2} flexShrink={0} width="10%">
-                                <Button variant="contained" fontSize="small" value="login" onClick={this.handleUserLogin}>
+                            <Box pt={ 2 } flexShrink={ 0 } width="10%">
+                                <Button variant="contained" fontSize="small" value="login" onClick={ this.handleUserLogin }>
                                     Login
                                 </Button>
                             </Box>
@@ -61,12 +61,12 @@ class Home extends PureComponent {
                     </AppBar>
                 </Grid>
                 {this.state.isLogin === 'login' &&
-                <Grid item xs={12}>
-                    <Login textField={classes} />
+                <Grid item xs={ 12 }>
+                    <Login textField={ classes } />
                 </Grid>}
                 {this.state.isLogin === 'userCreation' &&
-                <Grid item xs={12}>
-                    <UserCreation textField={classes} />
+                <Grid item xs={ 12 }>
+                    <UserCreation textField={ classes } />
                 </Grid>}
             </Grid>
         )

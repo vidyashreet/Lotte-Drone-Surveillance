@@ -34,7 +34,7 @@ class Login extends PureComponent {
         loginUser(loginDetails).then(response => {
             Cookies.set('token', response.data.access_token)
             if (Cookies.get('token') !== null) {
-                axios.defaults.headers.common.Authorization = `Bearer ${Cookies.get('token')}`
+                axios.defaults.headers.common.Authorization = `Bearer ${ Cookies.get('token') }`
                 this.props.history.push('/dashboard')
             }
         })
@@ -54,67 +54,67 @@ class Login extends PureComponent {
     render () {
         return (
             <Grid container justify="center" alignItems="center">
-                <Grid item xs={4}>
-                    <Box mt={30} borderRadius={4} border={1} borderColor="white.200">
-                        <form onSubmit={this.handleLogin} autoComplete="off">
+                <Grid item xs={ 4 }>
+                    <Box mt={ 30 } borderRadius={ 4 } border={ 1 } borderColor="white.200">
+                        <form onSubmit={ this.handleLogin } autoComplete="off">
                             <Grid container justify="center" alignItems="center">
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box p={4} color="white.300">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box p={ 4 } color="white.300">
                                         <Typography variant="h1">Lotte Drone Surveillance</Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box px={10} py={4} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box px={ 10 } py={ 4 } color="white.200">
                                         <TextField
                                             fullWidth
                                             required
                                             id="login-name"
                                             label="Username"
                                             type="text"
-                                            value={this.state.loginDetails.userId}
-                                            onChange={this.handleChangeUserId}
-                                            InputLabelProps={{
+                                            value={ this.state.loginDetails.userId }
+                                            onChange={ this.handleChangeUserId }
+                                            InputLabelProps={ {
                                                 classes: {
                                                     root: this.props.textField.label,
                                                     focused: this.props.textField.focusedLabel
                                                 },
                                                 className: this.props.textField.label
-                                            }}
-                                            InputProps={{
+                                            } }
+                                            InputProps={ {
                                                 classes: {
                                                     root: this.props.textField.underline
                                                 }
-                                            }}
+                                            } }
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box px={10} py={4} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box px={ 10 } py={ 4 } color="white.200">
                                         <TextField
                                             fullWidth
                                             required
                                             id="login-password"
                                             label="Password"
                                             type="password"
-                                            value={this.state.loginDetails.password}
-                                            onChange={this.handleChangePassword}
-                                            InputLabelProps={{
+                                            value={ this.state.loginDetails.password }
+                                            onChange={ this.handleChangePassword }
+                                            InputLabelProps={ {
                                                 classes: {
                                                     root: this.props.textField.label,
                                                     focused: this.props.textField.focusedLabel
                                                 },
                                                 className: this.props.textField.label
-                                            }}
-                                            InputProps={{
+                                            } }
+                                            InputProps={ {
                                                 classes: {
                                                     root: this.props.textField.underline
                                                 }
-                                            }}
+                                            } }
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box px={4} pt={5} pb={10} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box px={ 4 } pt={ 5 } pb={ 10 } color="white.200">
                                         <Button variant="contained" type="submit" color="secondary" fontSize="small">
                                             Login
                                         </Button>

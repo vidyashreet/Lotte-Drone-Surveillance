@@ -69,7 +69,7 @@ const palette = {
         main: warning
     },
     background: {
-        'default': '#141B2E'
+        default: '#141B2E'
     },
     grey,
     red,

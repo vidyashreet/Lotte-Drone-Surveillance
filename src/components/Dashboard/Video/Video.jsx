@@ -20,15 +20,15 @@ class Video extends PureComponent {
     }
 
     render () {
-        const BaseUrl = window.location.protocol + "//" + window.location.hostname;
+        const BaseUrl = window.location.protocol + '//' + window.location.hostname;
         const surveillanceUrl = this.state.isTrajectories ? BaseUrl + ':1937/video_trajectory' : BaseUrl + ':1937/video'
         const { droneData, droneObjectCount } = this.props
 
         return (
             <Box display="flex" flexDirection="column" color="white.100">
-                <Box height="320px" width="320px" mx="auto" mb={5} mt={5}>
+                <Box height="320px" width="320px" mx="auto" mb={ 5 } mt={ 5 }>
                     <Iframe
-                        url={surveillanceUrl}
+                        url={ surveillanceUrl }
                         className="video-frame"
                         display="initial"
                         position="relative"
@@ -40,39 +40,39 @@ class Video extends PureComponent {
                 <Box>
                     <Box display="flex" flexDirection="row">
                         <Box width="100%" display="flex" flexDirection="row">
-                            <Box pr={2} ml={4} width="50px">
+                            <Box pr={ 2 } ml={ 4 } width="50px">
                                 <Typography variant="caption">
                                     Drone Height:
                                 </Typography>
                             </Box>
                             {this.props.droneData &&
-                            <Box pr={5} pt={1}>
+                            <Box pr={ 5 } pt={ 1 }>
                                 <Typography variant="h2">
-                                    {`${droneData.height.data} ${droneData.height.unit.charAt(0)}`}
+                                    {`${ droneData.height.data } ${ droneData.height.unit.charAt(0) }`}
                                 </Typography>
                             </Box>}
-                            <Box pr={2} width="70px">
+                            <Box pr={ 2 } width="70px">
                                 <Typography variant="caption">
                                     Detecting objects:
                                 </Typography>
                             </Box>
                             {droneObjectCount &&
-                            <Box pt={1}>
-                                <Typography pt={2} variant="h2">
+                            <Box pt={ 1 }>
+                                <Typography pt={ 2 } variant="h2">
                                     {droneObjectCount}
                                 </Typography>
                             </Box>}
                         </Box>
-                        <Box flexShrink={0}>
+                        <Box flexShrink={ 0 }>
                             <Box>
                                 <Typography variant="body1" component="span">
                                     Trajectories
                                 </Typography>
                                 <Switch
-                                    checked={this.state.isTrajectories}
-                                    onChange={this.handleChangeTracjectory}
+                                    checked={ this.state.isTrajectories }
+                                    onChange={ this.handleChangeTracjectory }
                                     name="checkedA"
-                                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                    inputProps={ { 'aria-label': 'secondary checkbox' } }
                                 />
                             </Box>
                         </Box>

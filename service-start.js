@@ -1,14 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser')
-const path = require('path');
-const app = express();
-app.use(express.static(path.join(__dirname, 'build')));
+const express = require('express')
+const path = require('path')
+const app = express()
+app.use(express.static(path.join(__dirname, 'build')))
 
 app.get('/ping', function (req, res) {
- return res.send('pong');
-});
+    return res.send('pong')
+})
 
 app.get('/home', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-app.listen(3000);
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+app.listen(3000)

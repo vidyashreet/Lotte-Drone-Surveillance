@@ -71,137 +71,137 @@ class UserCreation extends PureComponent {
     render () {
         return (
             <Grid container justify="center" alignItems="center">
-                <Grid item xs={5}>
-                    <Box mt={25} borderRadius={4} border={1} borderColor="white.300">
-                        <form onSubmit={this.handleLogin} autoComplete="off">
+                <Grid item xs={ 5 }>
+                    <Box mt={ 25 } borderRadius={ 4 } border={ 1 } borderColor="white.300">
+                        <form onSubmit={ this.handleLogin } autoComplete="off">
                             <Grid container justify="center" alignItems="center">
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box p={4} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box p={ 4 } color="white.200">
                                         <Typography variant="h1">Lotte Drone Surveillance</Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box px={10} py={4} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box px={ 10 } py={ 4 } color="white.200">
                                         <TextField
                                             required
                                             fullWidth
                                             label="Username"
                                             type="text"
-                                            value={this.state.loginDetails.userId}
-                                            onChange={this.handleChangeUserId}
-                                            InputLabelProps={{
+                                            value={ this.state.loginDetails.userId }
+                                            onChange={ this.handleChangeUserId }
+                                            InputLabelProps={ {
                                                 classes: {
                                                     root: this.props.textField.label,
                                                     focused: this.props.textField.focusedLabel
                                                 },
                                                 className: this.props.textField.label
-                                            }}
-                                            InputProps={{
+                                            } }
+                                            InputProps={ {
                                                 classes: {
                                                     root: this.props.textField.underline
                                                 }
-                                            }}
+                                            } }
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={6} style={{ textAlign: 'center' }}>
-                                    <Box pl={10} pr={4} py={4} color="white.200">
+                                <Grid item xs={ 6 } style={ { textAlign: 'center' } }>
+                                    <Box pl={ 10 } pr={ 4 } py={ 4 } color="white.200">
                                         <TextField
                                             required
                                             fullWidth
                                             label="Firstname"
                                             type="text"
-                                            value={this.state.loginDetails.firstName}
-                                            onChange={this.handleChangeFirstName}
-                                            InputLabelProps={{
+                                            value={ this.state.loginDetails.firstName }
+                                            onChange={ this.handleChangeFirstName }
+                                            InputLabelProps={ {
                                                 classes: {
                                                     root: this.props.textField.label,
                                                     focused: this.props.textField.focusedLabel
                                                 },
                                                 className: this.props.textField.label
-                                            }}
-                                            InputProps={{
+                                            } }
+                                            InputProps={ {
                                                 classes: {
                                                     root: this.props.textField.underline
                                                 }
-                                            }}
+                                            } }
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={6} style={{ textAlign: 'center' }}>
-                                    <Box pr={10} pl={4} py={4} color="white.200">
+                                <Grid item xs={ 6 } style={ { textAlign: 'center' } }>
+                                    <Box pr={ 10 } pl={ 4 } py={ 4 } color="white.200">
                                         <TextField
                                             required
                                             fullWidth
                                             label="Lastname"
                                             type="text"
-                                            value={this.state.loginDetails.lastName}
-                                            onChange={this.handleChangeLastName}
-                                            InputLabelProps={{
+                                            value={ this.state.loginDetails.lastName }
+                                            onChange={ this.handleChangeLastName }
+                                            InputLabelProps={ {
                                                 classes: {
                                                     root: this.props.textField.label,
                                                     focused: this.props.textField.focusedLabel
                                                 },
                                                 className: this.props.textField.label
-                                            }}
-                                            InputProps={{
+                                            } }
+                                            InputProps={ {
                                                 classes: {
                                                     root: this.props.textField.underline
                                                 }
-                                            }}
+                                            } }
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box px={10} py={4} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box px={ 10 } py={ 4 } color="white.200">
                                         <TextField
                                             required
                                             fullWidth
                                             label="Email Id"
                                             type="email"
-                                            value={this.state.loginDetails.emailAddress}
-                                            onChange={this.handleChangeEmailId}
-                                            InputLabelProps={{
+                                            value={ this.state.loginDetails.emailAddress }
+                                            onChange={ this.handleChangeEmailId }
+                                            InputLabelProps={ {
                                                 classes: {
                                                     root: this.props.textField.label,
                                                     focused: this.props.textField.focusedLabel
                                                 },
                                                 className: this.props.textField.label
-                                            }}
-                                            InputProps={{
+                                            } }
+                                            InputProps={ {
                                                 classes: {
                                                     root: this.props.textField.underline
                                                 }
-                                            }}
+                                            } }
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box px={10} py={4} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box px={ 10 } py={ 4 } color="white.200">
                                         <TextField
                                             required
                                             fullWidth
                                             label="Password"
                                             type="password"
-                                            value={this.state.loginDetails.password}
-                                            onChange={this.handleChangePassword}
-                                            InputLabelProps={{
+                                            value={ this.state.loginDetails.password }
+                                            onChange={ this.handleChangePassword }
+                                            InputLabelProps={ {
                                                 classes: {
                                                     root: this.props.textField.label,
                                                     focused: this.props.textField.focusedLabel
                                                 },
                                                 className: this.props.textField.label
-                                            }}
-                                            InputProps={{
+                                            } }
+                                            InputProps={ {
                                                 classes: {
                                                     root: this.props.textField.underline
                                                 }
-                                            }}
+                                            } }
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} style={{ textAlign: 'center' }}>
-                                    <Box px={4} pt={5} pb={10} color="white.200">
+                                <Grid item xs={ 12 } style={ { textAlign: 'center' } }>
+                                    <Box px={ 4 } pt={ 5 } pb={ 10 } color="white.200">
                                         <Button variant="contained" type="submit" color="secondary" fontSize="small">
                                             Create User
                                         </Button>

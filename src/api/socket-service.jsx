@@ -1,11 +1,11 @@
 import openSocket from 'socket.io-client'
 import Cookies from 'js-cookie'
-const BaseUrl = window.location.protocol + "//" + window.location.hostname;
-const socket = openSocket(`${BaseUrl}:1936/`, {
+const BaseUrl = window.location.protocol + '//' + window.location.hostname;
+const socket = openSocket(`${ BaseUrl }:1936/`, {
     transportOptions: {
         polling: {
             extraHeaders: {
-                Authorization: `Bearer ${Cookies.get('token')}`
+                Authorization: `Bearer ${ Cookies.get('token') }`
             }
         }
     }

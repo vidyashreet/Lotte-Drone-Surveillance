@@ -47,39 +47,39 @@ class AppHeader extends PureComponent {
         return (
             <Box height="50px" display="flex" flexDirection="row">
                 <Box width="100%" display="flex" flexDirection="row">
-                    <Box p={3} component="span">
-                        <img src={headerIcon} width="25px" height="25px" />
+                    <Box p={ 3 } component="span">
+                        <img src={ headerIcon } width="25px" height="25px" />
                     </Box>
-                    <Box p={4}>
-                        <img src={wave} width="60px" />
+                    <Box p={ 4 }>
+                        <img src={ wave } width="60px" />
                     </Box>
                 </Box>
-                <Box flexShrink={0} display="flex" flexDirection="row">
-                    <Box p={3} component="span">
+                <Box flexShrink={ 0 } display="flex" flexDirection="row">
+                    <Box p={ 3 } component="span">
                         <Typography variant="caption">Prod Mode</Typography>
                         <Switch
-                            checked={this.props.prodMode}
-                            onChange={this.props.changeEnvironment}
+                            checked={ this.props.prodMode }
+                            onChange={ this.props.changeEnvironment }
                             name="checkedA"
-                            inputProps={{ 'aria-label': 'secondary checkbox' }}
+                            inputProps={ { 'aria-label': 'secondary checkbox' } }
                         />
                     </Box>
-                    <Box p={3} component="span">
+                    <Box p={ 3 } component="span">
                         <Typography variant="h6">John Doe</Typography>
                     </Box>
-                    <Box pr={5}>
-                        <IconButton aria-controls="fade-menu" aria-haspopup="true" onClick={this.handleOpenMenu}>
-                            <img src={profile} width="30px" height="30px" />
+                    <Box pr={ 5 }>
+                        <IconButton aria-controls="fade-menu" aria-haspopup="true" onClick={ this.handleOpenMenu }>
+                            <img src={ profile } width="30px" height="30px" />
                         </IconButton>
                         <Menu
                             id="fade-menu"
-                            anchorEl={this.state.anchorEl}
+                            anchorEl={ this.state.anchorEl }
                             keepMounted
-                            open={Boolean(this.state.anchorEl)}
-                            onClose={this.handleCloseMenu}
-                            TransitionComponent={Fade}
+                            open={ Boolean(this.state.anchorEl) }
+                            onClose={ this.handleCloseMenu }
+                            TransitionComponent={ Fade }
                         >
-                            <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                            <MenuItem onClick={ this.handleLogout }>Logout</MenuItem>
                         </Menu>
                     </Box>
                 </Box>
